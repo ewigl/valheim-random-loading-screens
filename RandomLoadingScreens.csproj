@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netstandard2.1</TargetFramework>
+
+    <LangVersion>10.0</LangVersion>
+    <RootNamespace>RandomLoadingScreens</RootNamespace>
+    <AssemblyName>RandomLoadingScreens</AssemblyName>
+
+    <Version>0.9.2</Version>
+    <Title>Random Loading Screens</Title>
+    <Authors>EwigLicht</Authors>
+    <Description>Random Loading Screens for Valheim.</Description>
+    <Copyright>Copyright © 2026 EwigLicht. All rights reserved.</Copyright>
+
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <AllowedReferenceRelatedFileExtensions>none</AllowedReferenceRelatedFileExtensions>
+
+    <GameInstallPath>E:\Games\Steam\steamapps\common\Valheim\</GameInstallPath>
+    <ModInstallPath>$(GameInstallPath)\BepInEx\plugins\</ModInstallPath>
+    <PackageInstallPath>$(MSBuildProjectDirectory)\package\BepInEx\plugins\</PackageInstallPath>
+
+    <NoWarn>$(NoWarn);MSB3245</NoWarn>
+    <NoWarn>$(NoWarn);MSB3277</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JotunnLib" Version="2.30.2" />
+
+    <Reference Include="assembly_valheim">
+      <HintPath>$(GameInstallPath)\valheim_Data\Managed\assembly_valheim.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+  </ItemGroup>
+
+  <Target Name="CleanExtraDLLs" AfterTargets="Build">
+    <ItemGroup>
+      <ExtraDlls Include="$(TargetDir)*.dll" Exclude="$(TargetDir)$(AssemblyName).dll" />
+    </ItemGroup>
+    <Delete Files="@(ExtraDlls)" />
+  </Target>
+
+  <Target Name="CopyToPlugins" AfterTargets="CleanExtraDLLs">
+    <MakeDir Directories="$(ModInstallPath);$(PackageInstallPath)" />
+    <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ModInstallPath)"
+      SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(PackageInstallPath)"
+      SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>
