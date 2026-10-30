@@ -16,7 +16,6 @@ namespace RandomLoadingScreens
         public const string PluginName = "Random Loading Screens";
         public const string PluginVersion = "0.0.4";
         private readonly Harmony _harmony = new(PluginGUID);
-
         public static List<string> loadingScreens = new();
         private static Sprite loadingSprite;
 
@@ -115,7 +114,7 @@ namespace RandomLoadingScreens
         [HarmonyPatch(typeof(FejdStartup), "LoadMainScene")]
         public static class LoadMainScene_Patch
         {
-            public static void Prefix(FejdStartup __instance)
+            public static void Postfix(FejdStartup __instance)
             {
                 loadingSprite = GetRandomLoadingScreen();
             }
@@ -130,10 +129,7 @@ namespace RandomLoadingScreens
             }
             public static void Postfix(Hud __instance, bool ___m_haveSetupLoadScreen, ref bool __state)
             {
-                if (__state
-                    && ___m_haveSetupLoadScreen
-                    && loadingSprite != null
-                    && __instance.m_loadingImage != null)
+                if (__state && ___m_haveSetupLoadScreen)
                 {
                     __instance.m_loadingImage.sprite = loadingSprite;
                     __instance.m_loadingImage.color = Color.white;
