@@ -28,14 +28,34 @@
     <NoWarn>$(NoWarn);MSB3277</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="JotunnLib" Version="2.30.2" />
+  <ItemDefinitionGroup>
+    <Reference>
+      <Private>false</Private>
+    </Reference>
+  </ItemDefinitionGroup>
 
+  <ItemGroup>
     <Reference Include="assembly_valheim">
       <HintPath>$(GameInstallPath)\valheim_Data\Managed\assembly_valheim.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-
+    <Reference Include="BepInEx">
+      <HintPath>$(GameInstallPath)\BepInEx\core\BepInEx.dll</HintPath>
+    </Reference>
+    <Reference Include="HarmonyLib">
+      <HintPath>$(GameInstallPath)\BepInEx\core\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(GameInstallPath)\valheim_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(GameInstallPath)\valheim_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>$(GameInstallPath)\valheim_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(GameInstallPath)\valheim_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Target Name="CleanExtraDLLs" AfterTargets="Build">
