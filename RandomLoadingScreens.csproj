@@ -23,9 +23,6 @@
     <GameInstallPath>E:\Games\Steam\steamapps\common\Valheim\</GameInstallPath>
     <ModInstallPath>$(GameInstallPath)\BepInEx\plugins\</ModInstallPath>
     <PackageInstallPath>$(MSBuildProjectDirectory)\package\BepInEx\plugins\</PackageInstallPath>
-
-    <NoWarn>$(NoWarn);MSB3245</NoWarn>
-    <NoWarn>$(NoWarn);MSB3277</NoWarn>
   </PropertyGroup>
 
   <ItemDefinitionGroup>
