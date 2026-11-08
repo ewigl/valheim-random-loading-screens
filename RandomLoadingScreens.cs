@@ -14,7 +14,7 @@ namespace RandomLoadingScreens
     {
         public const string PluginGUID = "ewigl.RandomLoadingScreens";
         public const string PluginName = "Random Loading Screens";
-        public const string PluginVersion = "0.0.4";
+        public const string PluginVersion = "1.0.1";
         private readonly Harmony _harmony = new(PluginGUID);
         public static List<string> loadingScreens = new();
         private static Sprite loadingSprite;
@@ -31,15 +31,10 @@ namespace RandomLoadingScreens
             _harmony.UnpatchSelf();
         }
 
-        private static string GetPluginDirectory()
-        {
-            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        }
-
         private static void LoadCustomLoadingScreens()
         {
             loadingScreens.Clear();
-            string path = Path.Combine(GetPluginDirectory(), "RandomLoadingScreens");
+            string path = Path.Combine(Paths.PluginPath, "RandomLoadingScreens");
 
             if (!Directory.Exists(path))
             {
